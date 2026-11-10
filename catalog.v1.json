@@ -1,7 +1,7 @@
 {
   "$schema": "https://apps.bridgething.com/schemas/catalog/v1.json",
   "schema": "catalog.v1",
-  "updated_at": "2026-11-10T08:02:10.673Z",
+  "updated_at": "2026-11-10T15:45:29.726Z",
   "repo": {
     "name": "tide-thing",
     "description": "Tide, moon and flood-risk dashboard for US coasts",
@@ -15,6 +15,12 @@
       "description": "Tide, moon and flood risk for US coasts, with NWS alerts",
       "author": "Thomas Marlowe",
       "icon": "https://tomarlowe.github.io/tide-thing/icons/01a1c441-d765-7693-8483-68ea686487cf.png",
+      "screenshots": [
+        "https://tomarlowe.github.io/tide-thing/screenshots/01a1c441-d765-7693-8483-68ea686487cf/01.png",
+        "https://tomarlowe.github.io/tide-thing/screenshots/01a1c441-d765-7693-8483-68ea686487cf/02.png",
+        "https://tomarlowe.github.io/tide-thing/screenshots/01a1c441-d765-7693-8483-68ea686487cf/03.png",
+        "https://tomarlowe.github.io/tide-thing/screenshots/01a1c441-d765-7693-8483-68ea686487cf/04.png"
+      ],
       "categories": [
         "clocks-weather",
         "travel"
@@ -22,6 +28,25 @@
       "homepage": "https://github.com/tomarlowe/tide-thing",
       "source": "https://github.com/tomarlowe/tide-thing",
       "versions": [
+        {
+          "version": "0.1.2",
+          "released_at": "2026-11-10T15:45:29.720Z",
+          "download": {
+            "url": "https://tomarlowe.github.io/tide-thing/r/01a1c441-d765-7693-8483-68ea686487cf/0.1.2.zip",
+            "size": 504557,
+            "sha256": "bc533a355263774639b98bedc3b58eb8e7b624e72de51b9fb0f03d33c3dcb028"
+          },
+          "settings": {
+            "url": "https://tomarlowe.github.io/tide-thing/s/01a1c441-d765-7693-8483-68ea686487cf/0.1.2.html",
+            "size": 39713,
+            "sha256": "99638be7007b83da39d32803db5fef5f30f5ee407dcdda18f73c9c1bf70bd08e"
+          },
+          "permissions": [
+            "geo"
+          ],
+          "min_libbridgething_version": "0.17.0",
+          "changelog": "Fixes found in the first real-device screenshots.\n\n- Flood risk no longer calls the current water level a \"next high tide\" once the high has passed. It says \"Water is X ft now\".\n- Flood risk gauge: the water level label no longer draws over itself when the peak equals the current level.\n- Tide now: the \"Now\" tag moves aside instead of covering a nearby high or low label.\n- Moon & tide: a day with only one tide in the table no longer shows a tiny bar.\n- Added four real device screenshots to the store listing and README.\n- Same untested items as 0.1.1."
+        },
         {
           "version": "0.1.1",
           "released_at": "2026-11-10T08:02:10.670Z",
