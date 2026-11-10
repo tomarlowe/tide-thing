@@ -18,6 +18,8 @@ export type RiskInput = {
   peakFt: number | null;
   /** when that peak is expected */
   peakAt: number | null;
+  /** the peak is the current gauge reading, already past, not a tide still to come */
+  peakIsNow?: boolean;
   levels: FloodLevels | null;
   datums: Datums | null;
   rain: RainLevel | null;
@@ -37,6 +39,8 @@ export function assess(i: RiskInput): Risk {
   const at = i.timeText(i.peakAt);
   const ft = i.peakFt.toFixed(1);
   const rainy = i.rain === 'heavy';
+  // when the gauge reading itself is the peak, the high tide has already passed
+  const peakWords = i.peakIsNow ? `Water is ${ft} ft now` : `High tide ${ft} ft at ${at}`;
 
   if (i.levels) {
     let cat = categorize(i.peakFt, i.levels);
@@ -49,9 +53,12 @@ export function assess(i: RiskInput): Risk {
           level: 'watch',
           badge: 'WATCH THE TIDE',
           line: rainy
-            ? `Heavy rain expected. High tide ${ft} ft at ${at}; minor flood level is ${i.levels.minor.toFixed(1)} ft.`
-            : `High tide ${ft} ft at ${at}, close to the ${i.levels.minor.toFixed(1)} ft minor flood level.`,
+            ? `Heavy rain expected. ${peakWords}; minor flood level is ${i.levels.minor.toFixed(1)} ft.`
+            : `${peakWords}, close to the ${i.levels.minor.toFixed(1)} ft minor flood level.`,
         };
+      }
+      if (i.peakIsNow) {
+        return { level: 'calm', badge: 'NO FLOOD RISK', line: `Water is ${ft} ft now, and the next high tide stays below flood levels.` };
       }
       return { level: 'calm', badge: 'NO FLOOD RISK', line: `Next high tide ${ft} ft at ${at}, below flood levels.` };
     }
@@ -61,7 +68,7 @@ export function assess(i: RiskInput): Risk {
     return {
       level,
       badge: `${name} FLOOD RISK`,
-      line: `High tide reaches ${ft} ft at ${at}. ${level[0]!.toUpperCase()}${level.slice(1)} flood level here is ${i.levels[level].toFixed(1)} ft.${rainy ? ' Heavy rain makes it worse.' : ''}`,
+      line: `${i.peakIsNow ? peakWords : `High tide reaches ${ft} ft at ${at}`}. ${level[0]!.toUpperCase()}${level.slice(1)} flood level here is ${i.levels[level].toFixed(1)} ft.${rainy ? ' Heavy rain makes it worse.' : ''}`,
     };
   }
 
@@ -69,8 +76,11 @@ export function assess(i: RiskInput): Risk {
     return {
       level: 'watch',
       badge: 'HIGHER THAN USUAL',
-      line: `High tide ${ft} ft at ${at}, above this station's usual high. NOAA has no flood levels here.${rainy ? ' Heavy rain expected.' : ''}`,
+      line: `${peakWords}, above this station's usual high. NOAA has no flood levels here.${rainy ? ' Heavy rain expected.' : ''}`,
     };
+  }
+  if (i.peakIsNow) {
+    return { level: 'calm', badge: 'NORMAL', line: `Water is ${ft} ft now, about normal. NOAA has no flood levels for this station.` };
   }
   return {
     level: 'calm',

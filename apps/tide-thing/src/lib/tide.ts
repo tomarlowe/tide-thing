@@ -42,15 +42,17 @@ export function dayKey(ms: number): DayKey {
 
 /** biggest swing between a high and a low within each local calendar day. */
 export function dailyRanges(ext: Extreme[]): Map<DayKey, number> {
-  const byDay = new Map<DayKey, { hi: number; lo: number }>();
+  const byDay = new Map<DayKey, { hi: number; lo: number; n: number }>();
   for (const e of ext) {
     const k = dayKey(e.t);
-    const cur = byDay.get(k) ?? { hi: -Infinity, lo: Infinity };
+    const cur = byDay.get(k) ?? { hi: -Infinity, lo: Infinity, n: 0 };
     cur.hi = Math.max(cur.hi, e.ft);
     cur.lo = Math.min(cur.lo, e.ft);
+    cur.n += 1;
     byDay.set(k, cur);
   }
   const out = new Map<DayKey, number>();
-  for (const [k, v] of byDay) if (Number.isFinite(v.hi) && Number.isFinite(v.lo)) out.set(k, v.hi - v.lo);
+  // the first day of the table is often cut off at midnight; one extreme is not a range
+  for (const [k, v] of byDay) if (v.n >= 2 && Number.isFinite(v.hi) && Number.isFinite(v.lo)) out.set(k, v.hi - v.lo);
   return out;
 }

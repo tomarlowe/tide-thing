@@ -48,6 +48,7 @@ export function derive(s: Snapshot, now: number, timeText: (ms: number) => strin
   // peak over the next 12 hours: the tide table plus any positive surge already showing
   let peakFt: number | null = null;
   let peakAt: number | null = null;
+  let peakIsNow = false;
   const surge = Math.max(anomaly ?? 0, 0);
   for (const e of ext) {
     if (e.kind !== 'H' || e.t < now || e.t > now + 12 * HOUR_MS) continue;
@@ -60,11 +61,13 @@ export function derive(s: Snapshot, now: number, timeText: (ms: number) => strin
   if (obsFresh && s.observed!.value > (peakFt ?? -Infinity)) {
     peakFt = s.observed!.value;
     peakAt = s.observed!.t;
+    peakIsNow = true;
   }
 
   const risk = assess({
     peakFt,
     peakAt,
+    peakIsNow,
     levels: s.flood,
     datums: s.datums,
     rain: s.rain?.level ?? null,

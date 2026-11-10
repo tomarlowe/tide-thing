@@ -1,5 +1,15 @@
 # tide-thing
 
+## 0.1.2
+
+Fixes found in the first real-device screenshots.
+
+- Flood risk no longer calls the current water level a "next high tide" once the high has passed. It says "Water is X ft now".
+- Flood risk gauge: the water level label no longer draws over itself when the peak equals the current level.
+- Tide now: the "Now" tag moves aside instead of covering a nearby high or low label.
+- Moon & tide: a day with only one tide in the table no longer shows a tiny bar.
+- Same untested items as 0.1.1.
+
 ## 0.1.1
 
 First public version. Same app as the private 0.1.0 test build, plus the app icon.

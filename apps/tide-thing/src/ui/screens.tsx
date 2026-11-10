@@ -58,6 +58,9 @@ export function TideNow({ s, d, now, stale }: ScreenProps) {
   const marks = s.extremes.filter(e => dayKey(e.t) === today);
   const xn = xs(now);
   const yn = ys(d.levelNow);
+  // a high near the now marker puts its label where the pill sits, so the pill steps aside
+  const crowd = marks.find(e => e.kind === 'H' && Math.abs(xs(e.t) - xn) < 66);
+  const pillX = crowd ? Math.min(W - 30, Math.max(30, xs(crowd.t) + (xs(crowd.t) < xn ? 66 : -66))) : xn;
   const nextTwo = d.next.slice(0, 2);
   const word = (k: 'H' | 'L') => (k === 'H' ? 'High' : 'Low');
 
@@ -120,8 +123,8 @@ export function TideNow({ s, d, now, stale }: ScreenProps) {
             );
           })}
           <line x1={xn} y1="34" x2={xn} y2={yn - 10} stroke={C.foam} strokeWidth="2" strokeDasharray="4 5" />
-          <rect x={xn - 27} y="4" width="54" height="28" rx="14" fill={C.foam} />
-          <text x={xn} y="24" textAnchor="middle" fill={C.bg} fontSize="17" fontWeight="800">Now</text>
+          <rect x={pillX - 27} y="4" width="54" height="28" rx="14" fill={C.foam} />
+          <text x={pillX} y="24" textAnchor="middle" fill={C.bg} fontSize="17" fontWeight="800">Now</text>
           <circle cx={xn} cy={yn} r="9" fill={C.foam} stroke={C.aqua} strokeWidth="4" />
           {[0, 6, 12, 18, 24].map(h => (
             <text key={h} x={xs(t0 + h * HOUR_MS)} y="300" textAnchor={h === 0 ? 'start' : h === 24 ? 'end' : 'middle'}
@@ -255,7 +258,7 @@ export function FloodRisk({ s, d, stale }: ScreenProps) {
                   <text x="138" y={ys(mhhw) + 5} fill={C.mist} fontSize="16" fontWeight="800">Usual high {f1(mhhw)}</text>
                 </g>
               )}
-          {d.peakFt != null && (
+          {d.peakFt != null && Math.abs(ys(d.peakFt) - ys(d.levelNow)) > 38 && (
             <g>
               <line x1="70" y1={ys(d.peakFt)} x2="134" y2={ys(d.peakFt)} stroke={C.aqua} strokeWidth="2" strokeDasharray="4 4" />
               <text x="66" y={ys(d.peakFt) + 2} textAnchor="end" fill={C.aqua} fontSize="20" fontWeight="800">{f1(d.peakFt)} ft</text>

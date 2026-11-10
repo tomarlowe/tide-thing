@@ -186,6 +186,10 @@ describe('tide maths', () => {
     expect(anomalyFt(ext, { t: at(3), value: 3.5 })).toBeCloseTo(0.5);
     expect(anomalyFt(ext, null)).toBeNull();
   });
+  test('a day with a single extreme has no range', () => {
+    const one = [{ t: Date.UTC(2026, 10, 8, 12), kind: 'H' as const, ft: 5 }];
+    expect(dailyRanges(one).size).toBe(0);
+  });
   test('daily range is high minus low for each day', () => {
     const ranges = [...dailyRanges(ext).values()];
     expect(ranges.some(r => Math.abs(r - 6) < 0.01)).toBe(true);
@@ -267,6 +271,9 @@ describe('flood risk wording', () => {
   });
   test('calm when well below, watch when close', () => {
     expect(assess({ ...base, peakFt: 5.0 }).level).toBe('calm');
+    const now = assess({ ...base, peakFt: 5.0, peakIsNow: true });
+    expect(now.line).toContain('Water is 5.0 ft now');
+    expect(now.line).not.toContain('Next high tide');
     expect(assess({ ...base, peakFt: 6.7 }).level).toBe('watch');
   });
   test('heavy rain lifts the wording one step', () => {
