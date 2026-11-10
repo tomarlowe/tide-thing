@@ -1,0 +1,12 @@
+{
+  "author": "Thomas Marlowe",
+  "homepage": "https://github.com/tomarlowe/tide-thing",
+  "source": "https://github.com/tomarlowe/tide-thing",
+  "icon": null,
+  "screenshots": [],
+  "categories": [
+    "clocks-weather",
+    "travel"
+  ],
+  "min_libbridgething_version": "0.17.0"
+}

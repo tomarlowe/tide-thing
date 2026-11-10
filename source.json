@@ -1,0 +1,8 @@
+{
+  "name": "tide-thing",
+  "description": "Tide, moon and flood-risk dashboard for US coasts",
+  "homepage": "https://github.com/tomarlowe/tide-thing",
+  "icon": null,
+  "base_url": "https://tomarlowe.github.io/tide-thing",
+  "recommended_sources": []
+}
