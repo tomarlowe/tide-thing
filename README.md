@@ -19,6 +19,15 @@ Switch with presets 1 to 4, the wheel, or the dots at the top right.
 
 A slim strip at the top of every screen shows the most severe active NWS alert: red for warnings, amber for watches and advisories. Wheel click turns spoken warnings on or off. Warnings are spoken once each, through the phone.
 
+## Screenshots
+
+Real screenshots from a Car Thing, taken by Thomas on 2026-11-10 with version 0.1.2. They show live NOAA data for the Charleston, SC tide gauge, so the numbers change from hour to hour.
+
+| | |
+| --- | --- |
+| ![Flood risk](apps/tide-thing/screenshots/01.png) | ![Tide now](apps/tide-thing/screenshots/02.png) |
+| ![Moon and tide](apps/tide-thing/screenshots/03.png) | ![On the water](apps/tide-thing/screenshots/04.png) |
+
 ## What it says and does not say
 
 - At a gauge with official flood levels it uses the official categories (minor, moderate, major).
@@ -42,7 +51,7 @@ The app needs your phone's location permission (rounded before use, see Privacy)
 - Official flood levels are converted to the tide-gauge datum using a rule checked at one station (Charleston, SC). Other stations are protected by a plausibility check that falls back to the gauge-relative wording.
 - The moon phase uses an average cycle and is good to about half a day.
 - Forecast peaks, "heavy rain" thresholds, the "higher than usual" margin and fishing windows are my own simple rules, listed in [docs/design-decisions.md](docs/design-decisions.md). They are not NOAA products.
-- Screenshots: none from the real device are in this repo yet.
+- The screenshots come from one device on one day at one gauge. Other stations, other coasts and live alerts have not been photographed.
 
 ## Privacy
 

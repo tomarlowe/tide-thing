@@ -8,6 +8,7 @@ Fixes found in the first real-device screenshots.
 - Flood risk gauge: the water level label no longer draws over itself when the peak equals the current level.
 - Tide now: the "Now" tag moves aside instead of covering a nearby high or low label.
 - Moon & tide: a day with only one tide in the table no longer shows a tiny bar.
+- Added four real device screenshots to the store listing and README.
 - Same untested items as 0.1.1.
 
 ## 0.1.1
