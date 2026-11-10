@@ -1,5 +1,9 @@
 # tide-thing
 
+## 0.1.3
+
+The store name is now "Tide Thing".
+
 ## 0.1.2
 
 Fixes found in the first real-device screenshots.
