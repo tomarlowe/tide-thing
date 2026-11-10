@@ -1,0 +1,48 @@
+{
+  "$schema": "https://apps.bridgething.com/schemas/catalog/v1.json",
+  "schema": "catalog.v1",
+  "updated_at": "2026-11-10T08:02:10.673Z",
+  "repo": {
+    "name": "tide-thing",
+    "description": "Tide, moon and flood-risk dashboard for US coasts",
+    "homepage": "https://github.com/tomarlowe/tide-thing",
+    "icon": null
+  },
+  "apps": [
+    {
+      "id": "01a1c441-d765-7693-8483-68ea686487cf",
+      "name": "tide-thing",
+      "description": "Tide, moon and flood risk for US coasts, with NWS alerts",
+      "author": "Thomas Marlowe",
+      "icon": "https://tomarlowe.github.io/tide-thing/icons/01a1c441-d765-7693-8483-68ea686487cf.png",
+      "categories": [
+        "clocks-weather",
+        "travel"
+      ],
+      "homepage": "https://github.com/tomarlowe/tide-thing",
+      "source": "https://github.com/tomarlowe/tide-thing",
+      "versions": [
+        {
+          "version": "0.1.1",
+          "released_at": "2026-11-10T08:02:10.670Z",
+          "download": {
+            "url": "https://tomarlowe.github.io/tide-thing/r/01a1c441-d765-7693-8483-68ea686487cf/0.1.1.zip",
+            "size": 503853,
+            "sha256": "045d791ce0d5360407512963f23d6df0ab81496eb734650c5d8a33166baff8b1"
+          },
+          "settings": {
+            "url": "https://tomarlowe.github.io/tide-thing/s/01a1c441-d765-7693-8483-68ea686487cf/0.1.1.html",
+            "size": 39713,
+            "sha256": "99638be7007b83da39d32803db5fef5f30f5ee407dcdda18f73c9c1bf70bd08e"
+          },
+          "permissions": [
+            "geo"
+          ],
+          "min_libbridgething_version": "0.17.0",
+          "changelog": "First public version. Same app as the private 0.1.0 test build, plus the app icon.\n\n- Four screens: Tide now, Moon & tide, Flood risk, On the water.\n- NWS alert strip on every screen (red for warnings, amber otherwise), spoken warnings through the phone.\n- US coasts only. Data from NOAA CO-OPS, NOAA NDBC and the National Weather Service.\n\nNot tested: speech over the car speakers, the live NWS alert lookup, flood-level conversion at stations other than Charleston, SC."
+        }
+      ]
+    }
+  ],
+  "recommended_sources": []
+}
